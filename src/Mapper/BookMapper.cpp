@@ -8,6 +8,8 @@ BookMapper::BookMapper(const std::string& filename)
 
 BookMapper::~BookMapper()
 {
+	fileManager.save(books, book_count);
+
 	free(books);
 	books = NULL;
 }
@@ -43,6 +45,7 @@ book_t* BookMapper::getbyId(int id)
 	}
 
 	free(book);
+	book = NULL;
 	return nullptr;
 }
 

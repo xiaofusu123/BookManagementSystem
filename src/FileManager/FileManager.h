@@ -47,13 +47,14 @@ public:
 
 	// ±£´æÎÄ¼þ
 	template<typename T>
-	inline bool save(const T& objects) {
+	inline bool save(const T* objects, int n) {
 		std::ofstream file(filename, std::ios::binary);
 		if (!file)
 			return false;
 
-		for (const auto& obj : objects)
-			file.write(reinterpret_cast<const char*>(&obj), sizeof(T));
+		for (int i = 0; i < n; i++) {
+			file.write(reinterpret_cast<const char*>(&objects[i]), sizeof(T));
+		}
 
 		file.close();
 		return true;

@@ -31,8 +31,6 @@ void Test()
 	bookMapper.deletebyId(0);
 	free(book);
 	book = NULL;
-
-	book_t* b = bookMapper.getbyAll();
 }
 
 int main()

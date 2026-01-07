@@ -3,7 +3,7 @@
 #include "../FileManager/FileManager.h"
 
 #define MAXSIZE 50
-#define MAX_RECORD 1000
+#define MAX_RECORD 200
 
 typedef struct borrowrecord_s {
 	int record_id;               // 借阅记录编号
@@ -23,13 +23,14 @@ private:
 
 	FileManager fileManager;
 
-public:
-	BorrowRecordMapper(const std::string& filename);
-
 	bool create_list();                                       // 创建线性表
 
-	borrowrecord_t getbyBillId(int bill_id);                  // 根据账单编号获取
-	borrowrecord_t getbyAccountId(int account_id);            // 根据账号获取
+public:
+	BorrowRecordMapper(const std::string& filename);
+	~BorrowRecordMapper();
+
+	borrowrecord_t* getbyBillId(int bill_id);                  // 根据账单编号获取
+	borrowrecord_t* getbyAccountId(int account_id);            // 根据账号获取
 
 	bool addbyOne(borrowrecord_t* record);                    // 单个增加
 	bool addbyBatch(borrowrecord_t record[], int n);          // 批量增加

@@ -3,7 +3,7 @@
 #include "../FileManager/FileManager.h"
 
 #define MAXSIZE 50
-#define MAX_BOOKS 1000
+#define MAX_BOOKS 200
 
 typedef struct book_s {
 	int book_id;                  // Í¼Êé±àºÅ£¨Ë÷Òý£©

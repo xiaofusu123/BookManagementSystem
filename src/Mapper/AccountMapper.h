@@ -26,7 +26,7 @@ public:
 
 	bool create_list();                                       // 创建线性表
 
-	account_t getbyId(int id);                                // 根据编号获取
+	account_t* getbyId(int id);                                // 根据编号获取
 
 	bool addbyOne(account_t* account);                         // 单个增加
 	bool addbyBatch(account_t account[], int n);               // 批量增加

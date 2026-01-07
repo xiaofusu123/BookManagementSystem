@@ -26,9 +26,9 @@ public:
 
 	bool create_list();                                 // 创建线性表
 
-	bill_t getbyBillId(int bill_id);                    // 根据账单编号获取
-	bill_t getbyAccountId(int account_id);              // 根据账号获取
-	bill_t getbyBookId(int book_id);                    // 根据图书编号获取
+	bill_t* getbyBillId(int bill_id);                    // 根据账单编号获取
+	bill_t* getbyAccountId(int account_id);              // 根据账号获取
+	bill_t* getbyBookId(int book_id);                    // 根据图书编号获取
 
 	bool addbyOne(bill_t* bill);                        // 单个增加
 	bool addbyBatch(bill_t bill[], int n);              // 批量增加
