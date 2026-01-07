@@ -23,13 +23,32 @@ bool BookMapper::create_list()
 	return true;
 }
 
-book_t BookMapper::getbyId(int id)
+book_t* BookMapper::getbyId(int id)
 {
+	book_t* book = (book_t*)malloc(sizeof(book_t));
+
 	for (int i = 0; i < book_count; i++) {
-		if (books[i].book_id == id)
-			return books[i];
+		if (books[i].book_id == id) {
+			*book = books[i];
+			return book;
+		}
 	}
 
-	return 
+	free(book);
+	return nullptr;
+}
+
+book_t* BookMapper::getbyBookName(const char bookName[])
+{
+	book_t* book = (book_t*)malloc(sizeof(book_t));
+
+	for (int i = 0; i < book_count; i++) {
+		if (books[i].book_name == bookName) {
+			*book = books[i];
+			return book;
+		}
+	}
+
+	return nullptr;
 }
 

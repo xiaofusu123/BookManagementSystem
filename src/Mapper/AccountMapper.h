@@ -5,12 +5,12 @@
 #define MAXSIZE 100
 
 typedef struct account_s {
-	int account_id;        // 账号
-	char name[MAXSIZE];    // 姓名
-	float balance;         // 余额
-	char phone[MAXSIZE];   // 联系电话
+	int account_id;           // 账号
+	char password[MAXSIZE];   // 密码
+	float balance;            // 余额
+	char phone[MAXSIZE];      // 联系电话
 	
-	int role;              // 角色（0：用户  1：管理员）
+	int role;                // 角色（0：用户  1：管理员）
 }account_t;
 
 
@@ -27,13 +27,11 @@ public:
 	bool create_list();                                       // 创建线性表
 
 	account_t getbyId(int id);                                // 根据编号获取
-	account_t getbyName(const char s[]);                      // 根据姓名获取
 
 	bool addbyOne(account_t account);                         // 单个增加
 	bool addbyBatch(account_t account[]);                     // 批量增加
 
 	bool deletebyId(int id);                                  // 根据编号删除
-	bool deletebyName(const char s[]);                        // 根据姓名删除
 	bool deletebyAll();                                       // 删除所有账号
 
 	bool updatebyOne(account_t account);                      // 单个更新

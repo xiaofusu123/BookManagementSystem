@@ -31,14 +31,14 @@ public:
 
 	bool create_list();                                 // 创建线性表
 
-	book_t getbyId(int id);                             // 根据编号获取
-	book_t getbyBookName(const char s[]);               // 根据书名获取
+	book_t* getbyId(int id);                            // 根据编号获取
+	book_t* getbyBookName(const char bookName[]);       // 根据书名获取
 
 	bool addbyOne(book_t book);                         // 单个增加
 	bool addbyBatch(book_t book[]);                     // 批量增加
 
 	bool deletebyId(int id);                            // 根据编号删除
-	bool deletebyBookName(const char s[]);              // 根据书名删除
+	bool deletebyBookName(const char bookName[]);       // 根据书名删除
 	bool deletebyAll();                                 // 删除所有图书
 
 	bool updatebyOne(book_t book);                      // 单个更新
