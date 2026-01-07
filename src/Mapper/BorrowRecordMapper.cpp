@@ -48,3 +48,37 @@ borrowrecord_t* BorrowRecordMapper::getbyBillId(int bill_id)
 	record = NULL;
 	return nullptr;
 }
+
+bool BorrowRecordMapper::addbyOne(borrowrecord_t* record)
+{
+	if (!record || record_count + 1 > MAX_RECORD)
+		return false;
+
+	records[record_count++] = *record;
+	return true;
+}
+
+bool BorrowRecordMapper::addbyBatch(borrowrecord_t record[], int n)
+{
+	return false;
+}
+
+bool BorrowRecordMapper::deletebyId(int bill_id)
+{
+	int i;
+	bool exist = false;
+
+	for (i = 0; i < record_count; i++) {
+		if (!exist) {
+			if (records->book_id == bill_id)
+				exist = true;
+		}
+		else {
+			records[i - 1] = records[i];
+		}
+	}
+	record_count--;
+
+	return exist;
+}
+
