@@ -52,3 +52,10 @@ book_t* BookMapper::getbyBookName(const char bookName[])
 	return nullptr;
 }
 
+bool BookMapper::addbyOne(book_t book)
+{
+
+
+	return false;
+}
+

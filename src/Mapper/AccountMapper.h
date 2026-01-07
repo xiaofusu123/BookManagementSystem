@@ -28,13 +28,13 @@ public:
 
 	account_t getbyId(int id);                                // 根据编号获取
 
-	bool addbyOne(account_t account);                         // 单个增加
+	bool addbyOne(account_t* account);                         // 单个增加
 	bool addbyBatch(account_t account[]);                     // 批量增加
 
 	bool deletebyId(int id);                                  // 根据编号删除
 	bool deletebyAll();                                       // 删除所有账号
 
-	bool updatebyOne(account_t account);                      // 单个更新
+	bool updatebyOne(account_t* account);                      // 单个更新
 	bool updatebyBatch(account_t account[]);                  // 批量更新
 
 	// 获取成员变量
