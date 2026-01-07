@@ -127,6 +127,10 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mapper\BookMapper.cpp" />
     <ClCompile Include="src\Mapper\BorrowRecordMapper.cpp" />
+    <ClCompile Include="src\service\AccountService.cpp" />
+    <ClCompile Include="src\service\BillService.cpp" />
+    <ClCompile Include="src\service\BookService.cpp" />
+    <ClCompile Include="src\service\BorrowRecordService.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FileManager\FileManager.h" />
@@ -134,6 +138,8 @@
     <ClInclude Include="src\Mapper\BillMapper.h" />
     <ClInclude Include="src\Mapper\BookMapper.h" />
     <ClInclude Include="src\Mapper\BorrowRecordMapper.h" />
+    <ClInclude Include="src\service\AccountService.h" />
+    <ClInclude Include="src\service\BillService.h" />
     <ClInclude Include="src\service\BookService.h" />
     <ClInclude Include="src\service\BorrowRecordService.h" />
     <ClInclude Include="src\Test.h" />
