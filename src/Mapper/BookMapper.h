@@ -26,10 +26,11 @@ private:
 
 	FileManager fileManager;
 
+	bool create_list();                                 // 创建线性表
+
 public:
 	BookMapper(const std::string& filename);
-
-	bool create_list();                                 // 创建线性表
+	~BookMapper();
 
 	book_t* getbyId(int id);                            // 根据编号获取
 	book_t* getbyBookName(const char bookName[]);       // 根据书名获取

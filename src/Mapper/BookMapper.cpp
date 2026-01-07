@@ -3,6 +3,13 @@
 BookMapper::BookMapper(const std::string& filename)
 {
 	fileManager.set_filename(filename);
+	create_list();
+}
+
+BookMapper::~BookMapper()
+{
+	free(books);
+	books = NULL;
 }
 
 bool BookMapper::create_list()
@@ -13,10 +20,9 @@ bool BookMapper::create_list()
 
 	std::vector<book_t> book_array = fileManager.load<book_t>();
 
-	int i = 0;
-	for (book_t book : book_array) {
-		books[i] = book;
-		i++;
+	int i;
+	for (i = 0; i < book_array.size(); i++) {
+		books[i] = book_array[i];
 	}
 	book_count = i;
 
@@ -26,6 +32,8 @@ bool BookMapper::create_list()
 book_t* BookMapper::getbyId(int id)
 {
 	book_t* book = (book_t*)malloc(sizeof(book_t));
+	if (!book)
+		return nullptr;
 
 	for (int i = 0; i < book_count; i++) {
 		if (books[i].book_id == id) {
@@ -41,6 +49,8 @@ book_t* BookMapper::getbyId(int id)
 book_t* BookMapper::getbyBookName(const char bookName[])
 {
 	book_t* book = (book_t*)malloc(sizeof(book_t));
+	if (!book)
+		return nullptr;
 
 	for (int i = 0; i < book_count; i++) {
 		if (books[i].book_name == bookName) {
@@ -54,7 +64,7 @@ book_t* BookMapper::getbyBookName(const char bookName[])
 
 bool BookMapper::addbyOne(book_t* book)
 {
-	if (!book)
+	if (!book || book_count + 1 > MAX_BOOKS)
 		return false;
 
 	books[book_count++] = *book;
@@ -63,7 +73,7 @@ bool BookMapper::addbyOne(book_t* book)
 
 bool BookMapper::addbyBatch(book_t book[], int n)
 {
-	if (!book)
+	if (!book || book_count + n > MAX_BOOKS)
 		return false;
 
 	for (int i = 0; i < n; i++)
@@ -72,3 +82,73 @@ bool BookMapper::addbyBatch(book_t book[], int n)
 	return true;
 }
 
+bool BookMapper::deletebyId(int id)
+{
+	int i;
+	bool exist = false;
+
+	for (i = 0; i < book_count; i++) {
+		if (!exist) {
+			if (books->book_id == id)
+				exist = true;
+		}
+		else {
+			books[i - 1] = books[i];
+		}
+	}
+	book_count--;
+
+	return exist;
+}
+
+bool BookMapper::deletebyBookName(const char bookName[])
+{
+	int i;
+	bool exist = false;
+
+	for (i = 0; i < book_count; i++) {
+		if (!exist) {
+			if (strcmp(books[i].book_name, bookName) == 0)
+				exist = true;
+		}
+		else {
+			books[i - 1] = books[i];
+		}
+	}
+	book_count--;
+
+	return exist;
+}
+
+bool BookMapper::deletebyAll()
+{
+	book_count = 0;
+	return true;
+}
+
+bool BookMapper::updatebyOne(book_t* book)
+{
+	for (int i = 0; i < book_count; i++) {
+		if (books[i].book_id == book->book_id) {
+			books[i] = *book;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool BookMapper::updatebyBatch(book_t book[], int n)
+{
+	int j;
+	for (int i = 0; i < n; i++) {
+		for (j = 0; j < book_count; j++) {
+			if (books[j].book_id == book->book_id) {
+				books[j] = *book;
+				break;
+			}
+		}
+	}
+
+	return true;
+}
