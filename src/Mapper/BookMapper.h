@@ -2,9 +2,6 @@
 
 #include "../FileManager/FileManager.h"
 
-#define MAXSIZE 50
-#define MAX_BOOKS 200
-
 typedef struct book_s {
 	int book_id;                  // 图书编号（索引）
 	char book_name[MAXSIZE];      // 书名

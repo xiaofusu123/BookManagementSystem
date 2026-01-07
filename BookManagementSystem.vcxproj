@@ -125,6 +125,8 @@
   <ItemGroup>
     <ClCompile Include="src\FileManager\FileManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Mapper\AccountMapper.cpp" />
+    <ClCompile Include="src\Mapper\BillMapper.cpp" />
     <ClCompile Include="src\Mapper\BookMapper.cpp" />
     <ClCompile Include="src\Mapper\BorrowRecordMapper.cpp" />
     <ClCompile Include="src\service\AccountService.cpp" />

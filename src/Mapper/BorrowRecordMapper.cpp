@@ -24,29 +24,47 @@ BorrowRecordMapper::~BorrowRecordMapper()
 
 bool BorrowRecordMapper::create_list()
 {
-	records = (borrowrecord_t*)malloc(sizeof(borrowrecord_t) * MAX_RECORD);
+	records = (borrowrecord_t*)malloc(sizeof(borrowrecord_t) * MAXNUMBER);
 	if (!records)
 		return false;
 
-	std::vector<borrowrecord_t> book_array = fileManager.load<borrowrecord_t>();
+	std::vector<borrowrecord_t> record_array = fileManager.load<borrowrecord_t>();
 
 	int i;
-	for (i = 0; i < book_array.size(); i++) {
-		records[i] = book_array[i];
+	for (i = 0; i < record_array.size(); i++) {
+		records[i] = record_array[i];
 	}
 	record_count = i;
 
 	return true;
 }
 
-borrowrecord_t* BorrowRecordMapper::getbyBillId(int bill_id)
+borrowrecord_t* BorrowRecordMapper::getbyBillId(int record_id)
 {
 	borrowrecord_t* record = (borrowrecord_t*)malloc(sizeof(borrowrecord_t));
 	if (!record)
 		return nullptr;
 
 	for (int i = 0; i < record_count; i++) {
-		if (records[i].book_id == bill_id) {
+		if (records[i].record_id == record_id) {
+			*record = records[i];
+			return record;
+		}
+	}
+
+	free(record);
+	record = NULL;
+	return nullptr;
+}
+
+borrowrecord_t* BorrowRecordMapper::getbyAccountId(int account_id)
+{
+	borrowrecord_t* record = (borrowrecord_t*)malloc(sizeof(borrowrecord_t));
+	if (!record)
+		return nullptr;
+
+	for (int i = 0; i < record_count; i++) {
+		if (records[i].account_id == account_id) {
 			*record = records[i];
 			return record;
 		}
@@ -59,7 +77,7 @@ borrowrecord_t* BorrowRecordMapper::getbyBillId(int bill_id)
 
 bool BorrowRecordMapper::addbyOne(borrowrecord_t* record)
 {
-	if (!record || record_count + 1 > MAX_RECORD)
+	if (!record || record_count + 1 > MAXNUMBER)
 		return false;
 
 	records[record_count++] = *record;
@@ -90,3 +108,41 @@ bool BorrowRecordMapper::deletebyId(int bill_id)
 	return exist;
 }
 
+bool BorrowRecordMapper::updateStatus(int bill_id, int status)
+{
+	for (int i = 0; i < record_count; i++) {
+		if (records[i].book_id == bill_id) {
+			records[i].status = status;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool BorrowRecordMapper::updatebyOne(borrowrecord_t* record)
+{
+	for (int i = 0; i < record_count; i++) {
+		if (records[i].record_id == record->record_id) {
+			records[i] = *record;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool BorrowRecordMapper::updatebyBatch(borrowrecord_t record[], int n)
+{
+	int j;
+	for (int i = 0; i < n; i++) {
+		for (j = 0; j < record_count; j++) {
+			if (records[j].record_id == records[i].record_id) {
+				records[j] = record[i];
+				break;
+			}
+		}
+	}
+
+	return true;
+}

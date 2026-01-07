@@ -2,8 +2,6 @@
 
 #include "../FileManager/FileManager.h"
 
-#define MAXSIZE 100
-
 typedef struct account_s {
 	int account_id;           // 账号
 	char password[MAXSIZE];   // 密码
@@ -21,11 +19,11 @@ private:
 
 	FileManager fileManager;
 
+	bool create_list();                                       // 创建线性表
+
 public:
 	AccountMapper();
 	AccountMapper(const char* filename);
-
-	bool create_list();                                       // 创建线性表
 
 	account_t* getbyId(int id);                                // 根据编号获取
 

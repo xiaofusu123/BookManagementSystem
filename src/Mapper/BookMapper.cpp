@@ -1,4 +1,5 @@
 #include "BookMapper.h"
+#include "BorrowRecordMapper.h"
 
 BookMapper::BookMapper()
 {
@@ -24,7 +25,7 @@ BookMapper::~BookMapper()
 
 bool BookMapper::create_list()
 {
-	books = (book_t*)malloc(sizeof(book_t) * MAX_BOOKS);
+	books = (book_t*)malloc(sizeof(book_t) * MAXNUMBER);
 	if (!books)
 		return false;
 
@@ -75,7 +76,7 @@ book_t* BookMapper::getbyBookName(const char bookName[])
 
 bool BookMapper::addbyOne(book_t* book)
 {
-	if (!book || book_count + 1 > MAX_BOOKS)
+	if (!book || book_count + 1 > MAXNUMBER)
 		return false;
 
 	books[book_count++] = *book;
@@ -84,7 +85,7 @@ bool BookMapper::addbyOne(book_t* book)
 
 bool BookMapper::addbyBatch(book_t book[], int n)
 {
-	if (!book || book_count + n > MAX_BOOKS)
+	if (!book || book_count + n > MAXNUMBER)
 		return false;
 
 	for (int i = 0; i < n; i++)
@@ -154,8 +155,8 @@ bool BookMapper::updatebyBatch(book_t book[], int n)
 	int j;
 	for (int i = 0; i < n; i++) {
 		for (j = 0; j < book_count; j++) {
-			if (books[j].book_id == book->book_id) {
-				books[j] = *book;
+			if (books[j].book_id == book[i].book_id) {
+				books[j] = book[i];
 				break;
 			}
 		}

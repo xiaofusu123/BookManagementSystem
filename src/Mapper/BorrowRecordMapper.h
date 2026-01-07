@@ -2,9 +2,6 @@
 
 #include "../FileManager/FileManager.h"
 
-#define MAXSIZE 50
-#define MAX_RECORD 200
-
 typedef struct borrowrecord_s {
 	int record_id;               // 借阅记录编号
 	int account_id;              // 账号
@@ -39,7 +36,7 @@ public:
 	bool deletebyId(int bill_id);                             // 根据账单编号删除
 	bool deletebyAll();                                       // 删除所有记录
 
-	bool updateStatus(int status);                            // 更新借阅记录状态
+	bool updateStatus(int bill_id, int status);               // 更新借阅记录状态
 	bool updatebyOne(borrowrecord_t* record);                 // 单个更新
 	bool updatebyBatch(borrowrecord_t record[], int n);       // 批量更新
 

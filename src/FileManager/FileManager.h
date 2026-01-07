@@ -4,6 +4,9 @@
 #include <fstream>
 #include <vector>
 
+#define MAXSIZE 50
+#define MAXNUMBER 200
+
 class FileManager
 {
 private:
