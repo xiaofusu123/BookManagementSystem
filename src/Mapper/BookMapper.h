@@ -35,14 +35,14 @@ public:
 	book_t* getbyBookName(const char bookName[]);       // 根据书名获取
 
 	bool addbyOne(book_t* book);                        // 单个增加
-	bool addbyBatch(book_t book[]);                     // 批量增加
+	bool addbyBatch(book_t book[], int n);              // 批量增加
 
 	bool deletebyId(int id);                            // 根据编号删除
 	bool deletebyBookName(const char bookName[]);       // 根据书名删除
 	bool deletebyAll();                                 // 删除所有图书
 
 	bool updatebyOne(book_t* book);                      // 单个更新
-	bool updatebyBatch(book_t book[]);                  // 批量更新
+	bool updatebyBatch(book_t book[], int n);            // 批量更新
 
 	// 获取成员变量
 	inline book_t* getbyAll() { return books; };        // 获取所有图书（整个数组）

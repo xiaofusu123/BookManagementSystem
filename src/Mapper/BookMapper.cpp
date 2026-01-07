@@ -54,8 +54,21 @@ book_t* BookMapper::getbyBookName(const char bookName[])
 
 bool BookMapper::addbyOne(book_t* book)
 {
+	if (!book)
+		return false;
 
+	books[book_count++] = *book;
+	return true;
+}
 
-	return false;
+bool BookMapper::addbyBatch(book_t book[], int n)
+{
+	if (!book)
+		return false;
+
+	for (int i = 0; i < n; i++)
+		books[book_count++] = book[i];
+
+	return true;
 }
 
