@@ -47,5 +47,11 @@
     <ClInclude Include="src\service\BorrowRecordService.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\Mapper\AccountMapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mapper\BillMapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,8 +7,7 @@
 
 typedef struct borrowrecord_s {
 	int record_id;               // 借阅记录编号
-	char name[MAXSIZE];          // 姓名
-	char phone[MAXSIZE];         // 联系电话
+	int account_id;              // 账号
 
 	int book_id;                 // 图书编号
 	char borrow_date[MAXSIZE];   // 借阅日期
