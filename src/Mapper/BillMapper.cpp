@@ -156,3 +156,8 @@ bool BillMapper::updatebyBatch(bill_t bill[], int n)
 
 	return true;
 }
+
+bool BillMapper::SaveBillData()
+{
+	return fileManager.save(bills, bill_count);
+}

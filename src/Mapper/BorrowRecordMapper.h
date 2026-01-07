@@ -43,4 +43,6 @@ public:
 	// 获取成员变量
 	inline borrowrecord_t* getbyAll() { return records; };   // 获取所有借阅记录（整个数组）
 	inline int get_recordcount() { return record_count; }    // 获取借阅记录数量
+
+	bool SaveRecordData();                                   // 保存借阅记录数据
 };

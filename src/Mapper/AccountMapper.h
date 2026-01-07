@@ -39,4 +39,6 @@ public:
 	// 获取成员变量
 	inline account_t* getbyAll() { return accounts; };        // 获取所有账号（整个数组）
 	inline int get_accountcount() { return account_count; }   // 获取账号数量
+
+	bool SaveAccountData();                                   // 保存账号数据
 };

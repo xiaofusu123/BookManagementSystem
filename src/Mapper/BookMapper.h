@@ -46,4 +46,6 @@ public:
 	// 获取成员变量
 	inline book_t* getbyAll() { return books; };        // 获取所有图书（整个数组）
 	inline int get_bookcount() { return book_count; }   // 获取图书种类数量
+
+	bool SaveBookData();                                // 保存图书数据
 };

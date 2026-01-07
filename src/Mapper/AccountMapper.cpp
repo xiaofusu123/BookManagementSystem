@@ -120,3 +120,8 @@ bool AccountMapper::updatebyBatch(account_t account[], int n)
 
 	return true;
 }
+
+bool AccountMapper::SaveAccountData()
+{
+	return fileManager.save(accounts, account_count);
+}

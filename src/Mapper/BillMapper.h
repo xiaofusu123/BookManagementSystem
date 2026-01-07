@@ -41,4 +41,6 @@ public:
 	// 获取成员变量
 	inline bill_t* getbyAll() { return bills; };        // 获取所有账单（整个数组）
 	inline int get_bookcount() { return bill_count; }   // 获取账单数量
+
+	bool SaveBillData();                                // 保存账单数据
 };

@@ -164,3 +164,8 @@ bool BookMapper::updatebyBatch(book_t book[], int n)
 
 	return true;
 }
+
+bool BookMapper::SaveBookData()
+{
+	return fileManager.save(books, book_count);
+}

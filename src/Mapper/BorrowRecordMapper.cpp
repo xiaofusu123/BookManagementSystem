@@ -146,3 +146,8 @@ bool BorrowRecordMapper::updatebyBatch(borrowrecord_t record[], int n)
 
 	return true;
 }
+
+bool BorrowRecordMapper::SaveRecordData()
+{
+	return fileManager.save(records, record_count);
+}
