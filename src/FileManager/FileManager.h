@@ -9,8 +9,6 @@ class FileManager
 private:
 	std::string filename;
 	size_t file_size = 0;
-
-	void get_fileSize(std::ifstream file);
 	
 public:
 	FileManager() { };
@@ -31,12 +29,14 @@ public:
 		std::ifstream file(filename, std::ios::binary);
 
 		if (!file)
-			return false;
+			return {};
 
-		get_fileSize(file);
+		file.seekg(0, std::ios::end);
+		file_size = file.tellg();
+		file.seekg(0, std::ios::beg);
 
 		size_t count = file_size / sizeof(T);
-		result.size(count);
+		result.resize(count);
 
 		if (count > 0)
 			file.read(reinterpret_cast<char*>(result.data()), file_size);

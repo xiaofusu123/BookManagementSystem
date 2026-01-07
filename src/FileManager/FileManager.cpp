@@ -36,11 +36,3 @@ bool FileManager::clear()
 	file.close();
 	return file.good();
 }
-
-
-void FileManager::get_fileSize(std::ifstream file)
-{
-	file.seekg(0, std::ios::end);
-	file_size = file.tellg();
-	file.seekg(0, std::ios::beg);
-}
