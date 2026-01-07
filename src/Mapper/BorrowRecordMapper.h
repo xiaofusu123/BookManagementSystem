@@ -12,6 +12,7 @@ typedef struct borrowrecord_s {
 
 	int book_id;                 // 图书编号
 	char borrow_date[MAXSIZE];   // 借阅日期
+	char deadline[MAXSIZE];      // 归还截止日期
 	int status;                  // 借阅状态（0：借阅中  1：已归还）
 }borrowrecord_t;   // 借阅记录
 
@@ -25,6 +26,8 @@ private:
 
 public:
 	BorrowRecordMapper(const std::string& filename);
+
+	bool create_list();                                      // 创建线性表
 
 	borrowrecord_t getbyId(int id);                          // 根据编号获取
 	borrowrecord_t getbyName(const char s[]);                // 根据姓名获取

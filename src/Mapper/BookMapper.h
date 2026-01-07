@@ -29,6 +29,8 @@ private:
 public:
 	BookMapper(const std::string& filename);
 
+	bool create_list();                                 // 创建线性表
+
 	book_t getbyId(int id);                             // 根据编号获取
 	book_t getbyBookName(const char s[]);               // 根据书名获取
 

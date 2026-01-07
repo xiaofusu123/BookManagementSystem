@@ -41,5 +41,11 @@
     <ClInclude Include="src\Test.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\service\BookService.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\service\BorrowRecordService.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

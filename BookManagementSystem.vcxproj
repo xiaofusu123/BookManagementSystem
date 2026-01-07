@@ -132,6 +132,8 @@
     <ClInclude Include="src\FileManager\FileManager.h" />
     <ClInclude Include="src\Mapper\BookMapper.h" />
     <ClInclude Include="src\Mapper\BorrowRecordMapper.h" />
+    <ClInclude Include="src\service\BookService.h" />
+    <ClInclude Include="src\service\BorrowRecordService.h" />
     <ClInclude Include="src\Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
