@@ -5,7 +5,7 @@
 void Test()
 {
 	FileManager fileManager("wkt.dat");
-	fileManager.creat();
+	fileManager.create();
 
 	BookMapper bookMapper("wkt.dat");
 

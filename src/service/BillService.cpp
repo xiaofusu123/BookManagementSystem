@@ -1,16 +1,41 @@
 #define  _CRT_SECURE_NO_WARNINGS
 #include"AccountService.h"
+
 #include <string.h>
 #include <stdlib.h>
 
-BillMapper billMapper;
+#include"../Mapper/BillMapper.h"
+#include"../Mapper/BorrowRecordMapper.h"
+
+static BillMapper billMapper;
+static AccountMapper accountMapper;
 //创建账单：成功返回 true，失败返回 false
 bool Create_Bill(int bill_id, int account_id, int book_id, int num, float total_price) {
-
+    // 参数合法性检查
     if (bill_id <= 0 || account_id <= 0 || book_id <= 0 || num <= 0 || total_price < 0) {
         return false;
     }
 
+    // 获取账户信息
+    account_t* account = accountMapper.getbyId(account_id);
+    if (account->account_id == 0) {  // 无效账户
+        return false;
+    }
+
+    // 检查余额是否足够
+    if (account->balance < total_price) {
+        printf("余额不足！当前余额: %.2f, 需要: %.2f\n", account->balance, total_price);
+        return false;
+    }
+
+    // 扣款：更新账户余额
+    account->balance -= total_price;
+    if (!accountMapper.updatebyOne(account)) {
+        printf("账户更新失败！\n");
+        return false;
+    }
+
+    // 创建账单
     bill_t newBill;
     newBill.bill_id = bill_id;
     newBill.account_id = account_id;
@@ -18,7 +43,13 @@ bool Create_Bill(int bill_id, int account_id, int book_id, int num, float total_
     newBill.num = num;
     newBill.total_price = total_price;
 
-    return billMapper.addbyOne(&newBill);
+    if (!billMapper.addbyOne(&newBill)) {
+        printf("账单创建失败！\n");
+        // 可选：回滚余额（如果支持事务）
+        return false;
+    }
+
+    return true;
 }
 
 // 删除账单：成功返回 true，失败返回 false
@@ -33,10 +64,10 @@ bool Delete_Bill( int bill_id) {
 }
 
 // 查询单条账单：返回账单信息，若不存在则返回空结构体（bill_id = 0）
-bill_t Search_Bill_One( int bill_id) {
+bill_t* Search_Bill_One( int bill_id) {
     if (bill_id <= 0) {
-        bill_t empty;
-        empty.bill_id = 0; // 标记为无效
+        bill_t* empty = (bill_t*)malloc(sizeof(bill_t));
+        empty->bill_id = 0; // 标记为无效
         return empty;
     }
 
@@ -59,8 +90,8 @@ bool Revise_Bill(int bill_id,int account_id,int book_id,int num,float total_pric
     }
 
     // 2. 检查账单是否存在
-    bill_t existing = billMapper.getbyBillId(bill_id);
-    if (existing.bill_id != bill_id) {
+    bill_t* existing = billMapper.getbyBillId(bill_id);
+    if (existing->bill_id != bill_id) {
         return false; // 账单不存在，无法修改
     }
 
@@ -109,3 +140,4 @@ bill_t* Search_Bill_All_Sorted() {
 
     return sorted;
 }
+
