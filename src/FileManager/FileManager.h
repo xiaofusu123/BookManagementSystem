@@ -18,7 +18,7 @@ public:
 
 	void set_filename(const std::string& filename);
 
-	bool creat();    // 创建文件
+	bool create();    // 创建文件
 	bool remove();   // 删除文件
 	bool clear();    // 清除文件内容
 

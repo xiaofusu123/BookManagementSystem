@@ -22,6 +22,7 @@ private:
 	FileManager fileManager;
 
 public:
+	BillMapper();
 	BillMapper(const std::string& filename);
 
 	bool create_list();                                 // 创建线性表

@@ -5,7 +5,7 @@ void FileManager::set_filename(const std::string& filename)
 	this->filename = filename;
 }
 
-bool FileManager::creat()
+bool FileManager::create()
 {
 	std::ofstream file(filename, std::ios::binary);
 	if (!file) {

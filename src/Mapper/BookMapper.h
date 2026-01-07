@@ -29,6 +29,7 @@ private:
 	bool create_list();                                 // 创建线性表
 
 public:
+	BookMapper();
 	BookMapper(const std::string& filename);
 	~BookMapper();
 

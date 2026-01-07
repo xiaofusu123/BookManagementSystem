@@ -1,5 +1,13 @@
 #include "BorrowRecordMapper.h"
 
+BorrowRecordMapper::BorrowRecordMapper()
+{
+	const char* filename = "BorrowRecord.dat";
+	fileManager.set_filename(filename);
+	fileManager.create();
+	create_list();
+}
+
 BorrowRecordMapper::BorrowRecordMapper(const std::string& filename)
 {
 	fileManager.set_filename(filename);

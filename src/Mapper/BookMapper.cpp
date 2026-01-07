@@ -1,5 +1,13 @@
 #include "BookMapper.h"
 
+BookMapper::BookMapper()
+{
+	const char* filename = "Book.dat";
+	fileManager.set_filename(filename);
+	fileManager.create();
+	create_list();
+}
+
 BookMapper::BookMapper(const std::string& filename)
 {
 	fileManager.set_filename(filename);

@@ -22,6 +22,7 @@ private:
 	FileManager fileManager;
 
 public:
+	AccountMapper();
 	AccountMapper(const char* filename);
 
 	bool create_list();                                       // 创建线性表

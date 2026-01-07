@@ -26,6 +26,7 @@ private:
 	bool create_list();                                       // 创建线性表
 
 public:
+	BorrowRecordMapper();
 	BorrowRecordMapper(const std::string& filename);
 	~BorrowRecordMapper();
 
