@@ -8,3 +8,4 @@ bool Revise_Bill( int account_id, char book_name[MAXSIZE]);
 static int compare_by_amount(const void* a, const void* b);
 bill_t* Search_Bill_All_Sorted();
 int get_next_bill_id(bill_t* bills);
+

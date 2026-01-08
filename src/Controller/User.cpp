@@ -56,7 +56,23 @@ void UserSearch() {
 		SearchBy(3);
 		break;
 	}
-	case 4:SearchAll(); break;
+	case 4: {
+		setColor(13);
+		int cc = 0;
+		printf("1.按出版日期排序查询\n2.按书籍价格排序\n3.按书籍剩余数量排序\n0.直接查询所有\n");
+		scanf("%d", &cc);
+		resetColor();
+		switch (cc) {
+		case 1:Js_sort();break;
+		case 2:XeSearchByMoney();break;
+		case 3:QSearchBytotalAndborrow();break;
+		default:
+			printf("正在搜索所有图书...\n");
+			SearchAll();
+			break;
+		}
+		break; 
+	}
 	default:
 		setColor(12); // 红色
 		printf("无效的搜索选项！请选择1、2或3～\n");
