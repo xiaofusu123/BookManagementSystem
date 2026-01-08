@@ -31,8 +31,9 @@ public:
 		std::vector<T> result;
 		std::ifstream file(filename, std::ios::binary);
 
-		if (!file)
+		if (!file) {
 			return {};
+		}
 
 		file.seekg(0, std::ios::end);
 		file_size = file.tellg();
@@ -52,8 +53,9 @@ public:
 	template<typename T>
 	inline bool save(const T* objects, int n) {
 		std::ofstream file(filename, std::ios::binary);
-		if (!file)
-			return false;
+		if (!file) {
+			create();
+		}
 
 		for (int i = 0; i < n; i++) {
 			file.write(reinterpret_cast<const char*>(&objects[i]), sizeof(T));

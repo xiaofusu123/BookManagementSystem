@@ -57,6 +57,9 @@
     <ClCompile Include="src\Controller\User.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\service\Service.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FileManager\FileManager.h">
@@ -102,6 +105,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Controller\User.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\service\Service.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

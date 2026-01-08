@@ -1,7 +1,7 @@
 #define  _CRT_SECURE_NO_WARNINGS
 #include"BorrowRecordService.h"
 #include <string.h>
-static BorrowRecordMapper borrowRecordMapper;
+
 //创建借书记录，成功返回 true，失败返回 false
 bool Create_Borrow_Book(int record_id, int account_id, int book_id,char borrow_date[MAXSIZE], char deadline[MAXSIZE], int status) {
     // 参数合法性校验

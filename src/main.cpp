@@ -8,7 +8,7 @@ void Test()
 	FileManager fileManager("wkt.dat");
 	fileManager.create();
 
-	BookMapper bookMapper("wkt.dat");
+	BookMapper bookMapper;
 
 	int n = 5;
 	book_t* book = (book_t*)malloc(sizeof(book_t) * n);
@@ -35,6 +35,8 @@ void Test()
 
 int main()
 {
+	// Test();
+
 	Controller();
 
 	return 0;

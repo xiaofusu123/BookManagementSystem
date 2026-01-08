@@ -1,8 +1,7 @@
 #define  _CRT_SECURE_NO_WARNINGS
 #include"BookService.h"
 #include <string.h>
-#include"../Mapper/BookMapper.h"
-BookMapper bookMapper;
+
 //创建图书：成功返回 true，失败返回 false
 bool Create_Book(int book_id, char book_name[MAXSIZE], float price, int total, int borrow,char type[MAXSIZE], char author[MAXSIZE], char publish_date[MAXSIZE]) {
     // 参数合法性检查

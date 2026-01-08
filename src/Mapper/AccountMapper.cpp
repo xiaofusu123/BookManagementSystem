@@ -8,10 +8,13 @@ AccountMapper::AccountMapper()
 	create_list();
 }
 
-AccountMapper::AccountMapper(const char* filename)
+AccountMapper::~AccountMapper()
 {
-	fileManager.set_filename(filename);
-	create_list();
+	if (fileManager.save(accounts, account_count))
+		std::cout << "文件已保存 Account.dat" << std::endl;
+
+	free(accounts);
+	accounts = NULL;
 }
 
 bool AccountMapper::create_list()
@@ -21,6 +24,8 @@ bool AccountMapper::create_list()
 		return false;
 
 	std::vector<account_t> account_array = fileManager.load<account_t>();
+	if (account_array.empty())
+		return false;
 
 	int i;
 	for (i = 0; i < account_array.size(); i++) {

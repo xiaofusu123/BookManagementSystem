@@ -8,10 +8,13 @@ BillMapper::BillMapper()
 	create_list();
 }
 
-BillMapper::BillMapper(const std::string& filename)
+BillMapper::~BillMapper()
 {
-	fileManager.set_filename(filename);
-	create_list();
+	if (fileManager.save(bills, bill_count))
+		std::cout << "文件已保存 Bill.dat" << std::endl;
+
+	free(bills);
+	bills = NULL;
 }
 
 bool BillMapper::create_list()

@@ -4,11 +4,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include"../Mapper/BillMapper.h"
-#include"../Mapper/BorrowRecordMapper.h"
-
-static BillMapper billMapper;
-static AccountMapper accountMapper;
 //创建账单：成功返回 true，失败返回 false
 bool Create_Bill(int bill_id, int account_id, int book_id, int num, float total_price) {
     // 参数合法性检查

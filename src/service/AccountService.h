@@ -1,5 +1,5 @@
 #pragma once
-#include"../Mapper/AccountMapper.h"
+#include"Service.h"
 
 bool Register( int account_id, char password[MAXSIZE], float balance, char phone[MAXSIZE], int role);
 int Login(int account, char password[MAXSIZE]);

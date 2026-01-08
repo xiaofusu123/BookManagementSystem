@@ -1,5 +1,7 @@
 #include "FileManager.h"
 
+#include <filesystem>
+
 void FileManager::set_filename(const std::string& filename)
 {
 	this->filename = filename;
@@ -7,6 +9,11 @@ void FileManager::set_filename(const std::string& filename)
 
 bool FileManager::create()
 {
+	if (std::filesystem::exists(filename)) {
+		std::cerr << "文件已存在 " << filename << std::endl;
+		return false;
+	}
+
 	std::ofstream file(filename, std::ios::binary);
 	if (!file) {
 		std::cerr << "创建文件失败 " << filename << std::endl;

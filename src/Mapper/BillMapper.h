@@ -23,7 +23,7 @@ private:
 
 public:
 	BillMapper();
-	BillMapper(const std::string& filename);
+	~BillMapper();
 
 	bill_t* getbyBillId(int bill_id);                    // 根据账单编号获取
 	bill_t* getbyAccountId(int account_id);              // 根据账号获取

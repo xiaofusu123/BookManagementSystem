@@ -4,12 +4,6 @@
 #include <cstring>
 #include <iostream>
 
-#include"../Mapper/BillMapper.h"
-#include"../Mapper/BorrowRecordMapper.h"
-
-AccountMapper accountMapper;
-BillMapper billMapper;
-BorrowRecordMapper borrowRecordMapper;
 // ×¢²áÕËºÅ£º³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
 bool Register(int account_id,char password[MAXSIZE],float balance,char phone[MAXSIZE],int role) {
 

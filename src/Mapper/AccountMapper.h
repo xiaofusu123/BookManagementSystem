@@ -23,7 +23,7 @@ private:
 
 public:
 	AccountMapper();
-	AccountMapper(const char* filename);
+	~AccountMapper();
 
 	account_t* getbyId(int id);                                // 根据编号获取
 

@@ -27,7 +27,6 @@ private:
 
 public:
 	BookMapper();
-	BookMapper(const std::string& filename);
 	~BookMapper();
 
 	book_t* getbyId(int id);                            // 根据编号获取

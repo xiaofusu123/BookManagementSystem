@@ -8,15 +8,10 @@ BorrowRecordMapper::BorrowRecordMapper()
 	create_list();
 }
 
-BorrowRecordMapper::BorrowRecordMapper(const std::string& filename)
-{
-	fileManager.set_filename(filename);
-	create_list();
-}
-
 BorrowRecordMapper::~BorrowRecordMapper()
 {
-	fileManager.save(records, record_count);
+	if (fileManager.save(records, record_count))
+		std::cout << "文件已保存 BorrowRecord.dat" << std::endl;
 
 	free(records);
 	records = NULL;

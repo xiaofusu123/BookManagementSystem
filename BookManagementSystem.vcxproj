@@ -102,6 +102,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +139,7 @@
     <ClCompile Include="src\service\BillService.cpp" />
     <ClCompile Include="src\service\BookService.cpp" />
     <ClCompile Include="src\service\BorrowRecordService.cpp" />
+    <ClCompile Include="src\service\Service.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Controller\app.h" />
@@ -149,6 +152,7 @@
     <ClInclude Include="src\Mapper\BillMapper.h" />
     <ClInclude Include="src\Mapper\BookMapper.h" />
     <ClInclude Include="src\Mapper\BorrowRecordMapper.h" />
+    <ClInclude Include="src\service\Service.h" />
     <ClInclude Include="src\service\AccountService.h" />
     <ClInclude Include="src\service\BillService.h" />
     <ClInclude Include="src\service\BookService.h" />

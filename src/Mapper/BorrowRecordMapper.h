@@ -24,7 +24,6 @@ private:
 
 public:
 	BorrowRecordMapper();
-	BorrowRecordMapper(const std::string& filename);
 	~BorrowRecordMapper();
 
 	borrowrecord_t* getbyBillId(int bill_id);                  // 根据账单编号获取

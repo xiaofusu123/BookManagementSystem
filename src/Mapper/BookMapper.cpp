@@ -9,15 +9,10 @@ BookMapper::BookMapper()
 	create_list();
 }
 
-BookMapper::BookMapper(const std::string& filename)
-{
-	fileManager.set_filename(filename);
-	create_list();
-}
-
 BookMapper::~BookMapper()
 {
-	fileManager.save(books, book_count);
+	if (fileManager.save(books, book_count))
+		std::cout << "文件已保存 Book.dat" << std::endl;
 
 	free(books);
 	books = NULL;
