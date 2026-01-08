@@ -2,7 +2,7 @@
 
 BorrowRecordMapper::BorrowRecordMapper()
 {
-	const char* filename = "BorrowRecord.dat";
+	const char* filename = "../data/BorrowRecord.dat";
 	fileManager.set_filename(filename);
 	fileManager.create();
 	create_list();

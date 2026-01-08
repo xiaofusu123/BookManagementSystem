@@ -39,6 +39,12 @@
     <ClCompile Include="src\service\BorrowRecordService.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\Mapper\AccountMapper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mapper\BillMapper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FileManager\FileManager.h">
@@ -71,8 +77,5 @@
     <ClInclude Include="src\service\BillService.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="wkt.dat" />
   </ItemGroup>
 </Project>

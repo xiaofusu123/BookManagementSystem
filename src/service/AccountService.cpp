@@ -47,7 +47,7 @@ bool Register(int account_id,char password[MAXSIZE],float balance,char phone[MAX
     newAccount.phone[MAXSIZE - 1] = '\0';
 
     // 4. 添加新账号
-    return accountMapper.addbyOne(&newAccount);
+    return accountMapper.addbyOne(&newAccount)&& accountMapper.SaveAccountData();
 }
 
 // 登录函数：成功返回 role（0 用户 / 1 管理员），失败返回 -1
@@ -59,6 +59,10 @@ int Login( int account_id,  char password[MAXSIZE]) {
     // 获取账户（假设 getbyId 在找不到时会抛异常或返回无效账户）
     // 为安全起见，我们先检查是否存在该 ID
     account_t* acc = accountMapper.getbyId(account_id);
+    if (!acc)
+    {
+        return false;
+    }
 
     // 假设 getbyId 在找不到时返回 account_id = -1 或其他无效值
     // 更健壮的做法是 AccountMapper 提供 exists(id)，但当前没有
@@ -82,6 +86,10 @@ bool Delete_Account(int account_id) {
 
     // 1. 检查账户是否存在
     account_t* acc = accountMapper.getbyId(account_id);
+    if (!acc)
+    {
+        return false;
+    }
     if (acc->account_id != account_id) {
         return false; // 账户不存在
     }
@@ -107,7 +115,7 @@ bool Delete_Account(int account_id) {
     }
 
     // 4. 通过所有检查，可以删除账户
-    return accountMapper.deletebyId(account_id);
+    return accountMapper.deletebyId(account_id) && accountMapper.SaveAccountData();
 }
 
 
@@ -143,6 +151,11 @@ bool Recharge(int account_id, float amount) {
     // 2. 获取账户信息
     account_t* acc = accountMapper.getbyId(account_id);
 
+    if (!acc)
+    {
+        return false;
+    }
+
     // 检查账户是否存在（通过 account_id 是否匹配）
     if (acc->account_id == 0) {  // 假设无效账户的 account_id 为 0
         printf("账户不存在：account_id=%d\n", account_id);
@@ -158,6 +171,7 @@ bool Recharge(int account_id, float amount) {
         return false;
     }
 
+    accountMapper.SaveAccountData();
     printf("充值成功！账户 %d 余额增加 %.2f，当前余额：%.2f\n",
         account_id, amount, acc->balance);
 
@@ -175,6 +189,10 @@ bool Deduct(int account_id, float amount) {
 
     // 2. 获取账户信息
     account_t* acc = accountMapper.getbyId(account_id);
+    if (!acc)
+    {
+        return false;
+    }
 
     // 检查账户是否存在
     if (acc->account_id == 0) {
@@ -198,6 +216,7 @@ bool Deduct(int account_id, float amount) {
         return false;
     }
 
+    accountMapper.SaveAccountData();
     printf("扣款成功！账户 %d 扣款 %.2f，当前余额：%.2f\n",
         account_id, amount, acc->balance);
 

@@ -3,7 +3,7 @@
 
 BookMapper::BookMapper()
 {
-	const char* filename = "Book.dat";
+	const char* filename = "../data/Book.dat";
 	fileManager.set_filename(filename);
 	fileManager.create();
 	create_list();

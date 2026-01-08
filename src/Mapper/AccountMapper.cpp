@@ -2,7 +2,7 @@
 
 AccountMapper::AccountMapper()
 {
-	const char* filename = "Account.dat";
+	const char* filename = "../data/Account.dat";
 	fileManager.set_filename(filename);
 	fileManager.create();
 	create_list();

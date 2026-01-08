@@ -18,6 +18,10 @@ bool Create_Bill(int bill_id, int account_id, int book_id, int num, float total_
 
     // 获取账户信息
     account_t* account = accountMapper.getbyId(account_id);
+    if (!account)
+    {
+		return false;
+    }
     if (account->account_id == 0) {  // 无效账户
         return false;
     }
@@ -48,6 +52,8 @@ bool Create_Bill(int bill_id, int account_id, int book_id, int num, float total_
         // 可选：回滚余额（如果支持事务）
         return false;
     }
+
+
 
     return true;
 }

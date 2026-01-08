@@ -2,7 +2,7 @@
 
 BillMapper::BillMapper()
 {
-	const char* filename = "Bill.dat";
+	const char* filename = "../data/Bill.dat";
 	fileManager.set_filename(filename);
 	fileManager.create();
 	create_list();

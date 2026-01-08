@@ -121,3 +121,19 @@ bool Search_Book(char type[MAXSIZE], char book_name[MAXSIZE], char author[MAXSIZ
 
     return found;
 }
+
+
+// 查询所有书籍，返回指向图书数组的指针
+// 若无书籍则返回 nullptr
+book_t* SearchAll() {
+    // 获取所有图书
+    book_t* books = bookMapper.getbyAll();
+
+    // 如果图书数量为0，返回nullptr
+    if (bookMapper.get_bookcount() == 0) {
+        printf("暂无图书记录。\n");
+        return nullptr;
+    }
+
+    return books;
+}
