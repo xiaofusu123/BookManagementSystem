@@ -158,12 +158,6 @@
     <ClInclude Include="src\service\BookService.h" />
     <ClInclude Include="src\service\BorrowRecordService.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="data\Account.dat" />
-    <None Include="data\Bill.dat" />
-    <None Include="data\Book.dat" />
-    <None Include="data\BorrowRecord.dat" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

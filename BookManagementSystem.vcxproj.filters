@@ -71,9 +71,6 @@
     <ClInclude Include="src\Mapper\BorrowRecordMapper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Test.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\service\BookService.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -110,11 +107,5 @@
     <ClInclude Include="src\service\Service.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="data\Account.dat" />
-    <None Include="data\Bill.dat" />
-    <None Include="data\Book.dat" />
-    <None Include="data\BorrowRecord.dat" />
   </ItemGroup>
 </Project>

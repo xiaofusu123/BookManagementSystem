@@ -57,15 +57,6 @@ int Login( int account_id,  char password[MAXSIZE]) {
     {
         return -1;
     }
-
-    // 假设 getbyId 在找不到时返回 account_id = -1 或其他无效值
-    // 更健壮的做法是 AccountMapper 提供 exists(id)，但当前没有
-    // 所以我们依赖：如果 account_id 不匹配，则视为不存在
-
-    if (acc->account_id != account_id) {
-        return -1; // 账户不存在
-    }
-
     // 比较密码
     if (strncmp(acc->password, password, MAXSIZE) == 0) {
         return acc->role; // 登录成功，返回角色
@@ -83,9 +74,6 @@ bool Delete_Account(int account_id) {
     if (!acc)
     {
         return false;
-    }
-    if (acc->account_id != account_id) {
-        return false; // 账户不存在
     }
 
     // 2. 检查是否有对应的账单（buy bill）
@@ -150,12 +138,6 @@ bool Recharge(int account_id, float amount) {
         return false;
     }
 
-    // 检查账户是否存在（通过 account_id 是否匹配）
-    if (acc->account_id == 0) {  // 假设无效账户的 account_id 为 0
-        printf("账户不存在：account_id=%d\n", account_id);
-        return false;
-    }
-
     // 3. 更新余额
     acc->balance += amount;
 
@@ -188,12 +170,6 @@ bool Deduct(int account_id, float amount) {
         return false;
     }
 
-    // 检查账户是否存在
-    if (acc->account_id == 0) {
-        printf("账户不存在：account_id=%d\n", account_id);
-        return false;
-    }
-
     // 3. 检查余额是否足够
     if (acc->balance < amount) {
         printf("余额不足！账户 %d 当前余额：%.2f，需扣款：%.2f\n",
@@ -217,3 +193,22 @@ bool Deduct(int account_id, float amount) {
     return true;
 }
 
+//查询账号的余额：成功返回余额，失败返回 -1.0f
+float Check_Balance(int account_id) {
+
+	// 1. 参数合法性校验
+	if (account_id <= 0) {
+		printf("参数错误：account_id=%d\n", account_id);
+		return -1.0f;
+	}
+
+	// 2. 获取账户信息
+	account_t* acc = accountMapper.getbyId(account_id);
+	if (!acc)
+	{
+		printf("账户不存在：account_id=%d\n", account_id);
+		return -1.0f;
+	}
+	// 3. 返回余额
+	return acc->balance;
+}   
