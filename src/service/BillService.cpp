@@ -4,6 +4,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+
+
 //获取自增id
 int get_next_bill_id(bill_t* bills) {
     int count = billMapper.get_bookcount();

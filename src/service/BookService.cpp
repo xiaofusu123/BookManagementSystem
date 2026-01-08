@@ -108,7 +108,7 @@ bool Search_Book(char type[MAXSIZE], char book_name[MAXSIZE], char author[MAXSIZ
             printf("=== 找到图书 ===\n");
             printf("ID: %d, 名称: %s, 价格: %.2f, 总数: %d, 借阅: %d\n",
                 book->book_id, book->book_name, book->price, book->total, book->borrow);
-            printf("类别: %s, 作者: %s, 出版日期: %s\n",
+            printf("类别: %s, 作者: %s, 出版日期: %s\n\n",
                 book->type, book->author, book->pubish_date);
             found = true;
         }
@@ -124,15 +124,23 @@ bool Search_Book(char type[MAXSIZE], char book_name[MAXSIZE], char author[MAXSIZ
 
 // 查询所有书籍，返回指向图书数组的指针
 // 若无书籍则返回 nullptr
-book_t* SearchAll() {
+bool SearchAll() {
     // 获取所有图书
+    int count = bookMapper.get_bookcount();
     book_t* books = bookMapper.getbyAll();
 
-    // 如果图书数量为0，返回nullptr
-    if (bookMapper.get_bookcount() == 0) {
-        printf("暂无图书记录。\n");
-        return nullptr;
+    if (count <= 0 || !books) {
+        printf("暂无图书数据。\n");
+        return false;
     }
 
-    return books;
+    for (int i = 0; i < count; i++) {
+        book_t* book = &books[i];
+            printf("=== 找到图书 ===\n");
+            printf("ID: %d, 名称: %s, 价格: %.2f, 总数: %d, 借阅: %d\n",
+                book->book_id, book->book_name, book->price, book->total, book->borrow);
+            printf("类别: %s, 作者: %s, 出版日期: %s\n\n",
+                book->type, book->author, book->pubish_date);     
+    }
+    return true;
 }

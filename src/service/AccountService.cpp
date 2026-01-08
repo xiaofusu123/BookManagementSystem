@@ -4,6 +4,7 @@
 #include <cstring>
 #include <iostream>
 
+
 // ×¢²áÕËºÅ£º³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
 bool Register(int account_id,char password[MAXSIZE],float balance,char phone[MAXSIZE],int role) {
 
