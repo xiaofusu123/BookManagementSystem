@@ -14,6 +14,9 @@ bool Create_Borrow_Book(int record_id, int account_id, int book_id,char borrow_d
 
     // 检查是否已存在相同 record_id 的记录
     borrowrecord_t* existing = borrowRecordMapper.getbyBillId(record_id);
+    if (!existing) {
+        return false;
+    }
     // 检查是否“有效”（比如 ID 是否匹配）
     if (existing->record_id == record_id) {  // 假设 ID 是唯一标识
         printf("借阅记录编号 %d 已存在！\n", record_id);
@@ -30,7 +33,7 @@ bool Create_Borrow_Book(int record_id, int account_id, int book_id,char borrow_d
     newRecord.status = status;
 
     // 添加到数据库
-    return borrowRecordMapper.addbyOne(&newRecord);
+    return borrowRecordMapper.addbyOne(&newRecord)&& borrowRecordMapper.SaveRecordData();
 }
 
 //删除借书记录，成功返回 true，失败返回 false
@@ -41,6 +44,10 @@ bool Delete_Borrow_Book(int record_id) {
 
     // 获取记录（返回结构体）
     borrowrecord_t* record = borrowRecordMapper.getbyBillId(record_id);
+	if (!record)
+	{
+		return false;
+	}
 
     // 判断是否存在：record_id 是否等于输入的 ID
     if (record->record_id != record_id) {
@@ -49,7 +56,7 @@ bool Delete_Borrow_Book(int record_id) {
     }
 
     // 删除操作
-    return borrowRecordMapper.deletebyId(record_id);
+    return borrowRecordMapper.deletebyId(record_id)&& borrowRecordMapper.SaveRecordData();
 }
 
 //修改借书记录，成功返回 true，失败返回 false
@@ -63,6 +70,9 @@ bool Revise_Borrow_Book(int record_id, int account_id, int book_id,char borrow_d
 
     // 获取原记录
     borrowrecord_t* record = borrowRecordMapper.getbyBillId(record_id);
+    if (!record) {
+		return false;
+    }
 
     // 判断是否存在
     if (record->record_id != record_id) {
@@ -78,7 +88,7 @@ bool Revise_Borrow_Book(int record_id, int account_id, int book_id,char borrow_d
     record->status = status;
 
     // 保存更新
-    return borrowRecordMapper.updatebyOne(record);  // 注意：updatebyOne 接收指针
+    return borrowRecordMapper.updatebyOne(record)&& borrowRecordMapper.SaveRecordData();  // 注意：updatebyOne 接收指针
 }
 
 
@@ -98,6 +108,9 @@ borrowrecord_t* Search_Borrow_Book_One(int record_id) {
 
     // 调用 Mapper 获取记录
     borrowrecord_t* record = borrowRecordMapper.getbyBillId(record_id);
+	if (!record) {
+        return false;
+	}
 
     // 如果获取到的 record_id 不等于输入值，说明没找到
     if (record->record_id != record_id) {
@@ -121,6 +134,10 @@ borrowrecord_t* Search_Borrow_Book_One(int record_id) {
 borrowrecord_t* Search_Borrow_Book_All() {
     // 获取所有记录
     borrowrecord_t* records = borrowRecordMapper.getbyAll();
+
+    if (!records) {
+        return false;
+    }
 
     // 如果记录数量为0，返回nullptr
     if (borrowRecordMapper.get_recordcount() == 0) {

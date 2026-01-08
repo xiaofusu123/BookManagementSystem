@@ -54,7 +54,7 @@ bool Create_Bill(int bill_id, int account_id, int book_id, int num, float total_
     }
 
 
-
+    billMapper.SaveBillData();
     return true;
 }
 
@@ -66,7 +66,7 @@ bool Delete_Bill( int bill_id) {
     }
 
     // 调用 BillMapper 的 deletebyId 方法
-    return billMapper.deletebyId(bill_id);
+    return billMapper.deletebyId(bill_id)&& billMapper.SaveBillData();
 }
 
 // 查询单条账单：返回账单信息，若不存在则返回空结构体（bill_id = 0）
@@ -97,6 +97,9 @@ bool Revise_Bill(int bill_id,int account_id,int book_id,int num,float total_pric
 
     // 2. 检查账单是否存在
     bill_t* existing = billMapper.getbyBillId(bill_id);
+	if (!existing) {
+		return false; // 账单不存在
+	}
     if (existing->bill_id != bill_id) {
         return false; // 账单不存在，无法修改
     }
@@ -110,7 +113,7 @@ bool Revise_Bill(int bill_id,int account_id,int book_id,int num,float total_pric
     updated.total_price = total_price;
 
     // 4. 执行更新
-    return billMapper.updatebyOne(&updated);
+    return billMapper.updatebyOne(&updated)&&billMapper.SaveBillData();
 }
 
 // 比较函数：按 total_price 升序
