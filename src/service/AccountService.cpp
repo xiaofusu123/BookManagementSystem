@@ -117,10 +117,10 @@ account_t* SearchOne( int account_id) {
 
 // 查询所有账号信息：返回指向账号数组的指针
 // 注意：返回的是内部数组的指针，不要修改或释放！
-account_t* SearchAll() {
-    // 调用 AccountMapper 的 getbyAll() 获取所有账号
-    return accountMapper.getbyAll();
-}
+//account_t* SearchAll() {
+//    // 调用 AccountMapper 的 getbyAll() 获取所有账号
+//    return accountMapper.getbyAll();
+//}
 
 
 // 给账号进行充值：成功返回 true，失败返回 false

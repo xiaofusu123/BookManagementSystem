@@ -6,6 +6,7 @@ void Manager() {
     int choice = 0;
     // 循环显示管理员界面，直到退出
     while (1) {
+        system("cls");
         // 可爱的管理员界面标题
         setColor(11);  // 淡蓝紫色
         printf("这里可以轻松管理图书哦～ \n");
@@ -25,7 +26,7 @@ void Manager() {
 
         // 读取用户选择
         scanf("%d", &choice);
-        getchar(); // 吸收换行符
+        getchar();// 吸收换行符
         ManagerMenu(choice);
         if (choice == 0)
             return;
@@ -44,9 +45,9 @@ void ManagerSearch() {
 
     setColor(14);  // 亮黄色
     printf("请选择搜索维度：\n");
-    printf("   1. 书名\n  2. 作者\n   3. 类型\n  ");
+    printf("   1. 书名\n  2. 作者\n   3. 类型\n    4.所有书籍\n  ");
     setColor(10); // 亮绿色
-    printf("请输入数字（1/2/3）：");
+    printf("请输入数字（1/2/3/4）：");
     resetColor();
 
     int number = 0;
@@ -73,6 +74,7 @@ void ManagerSearch() {
         SearchByKey(3); 
         break; 
     }
+    case 4:SearchAll(); break;
     default:
         setColor(12); // 红色
         printf("无效的搜索选项！请选择1、2或3～\n");
@@ -163,9 +165,13 @@ void ManagerADD() {
 
     if (confirm == 'y' || confirm == 'Y') {
         setColor(9);
-		Create_Book(book_id, book_name, price, total, 0, type, author, publish_date); // 调用添加服务
-        printf("\n编号 %d 的《%s》已在库中～\n", book_id, book_name);
-        resetColor();
+		bool success = Create_Book(book_id, book_name, price, total, 0, type, author, publish_date);// 调用添加服务
+        if (success) {
+            printf("\n编号 %d 的《%s》已在库中～\n", book_id, book_name);
+            resetColor();
+        }
+        else
+            printf("添加失败\n");
     }
     else {
         setColor(12);
@@ -240,7 +246,7 @@ void ManagerUpdate() {
 
     //输入价格
     setColor(13);
-    printf("图书名称：");
+    printf("图书价格：");
     resetColor();
     scanf("%f", &price);
     getchar(); // 吸收换行
@@ -255,7 +261,7 @@ void ManagerUpdate() {
 
 
     setColor(13);
-    printf("图书总量：");
+    printf("图书借出数量：");
     resetColor();
     scanf("%d", &borrow);
     getchar(); // 吸收换行
@@ -296,12 +302,12 @@ void ManagerUpdate() {
     if (confirm == 'y' || confirm == 'Y') {
         setColor(9);
         Revise_Book(book_id,book_name,price,total,borrow,type,author,publish_date); // 调用添加服务
-        printf("\n图书添加成功！编号 %d 的《%s》已入库～\n", book_id, book_name);
+        printf("\n图书更新成功！编号 %d 的《%s》已入库～\n", book_id, book_name);
         resetColor();
     }
     else {
         setColor(12);
-        printf("\n已取消图书添加操作～\n");
+        printf("\n已取消图书更新操作～\n");
         resetColor();
     }
 
@@ -342,7 +348,7 @@ void SearchByKey(int i) {
     resetColor();
     fgets(keyword, sizeof(keyword), stdin);
     keyword[strcspn(keyword, "\n")] = '\0';
-    setColor(9); // 亮蓝色
+    resetColor(); // 亮蓝色
     if (i == 1)
         Search_Book(null, keyword, null);
 	else if (i == 2)

@@ -19,9 +19,9 @@ int get_next_record_id(borrowrecord_t* borrowrecords) {
 
 //创建借书记录，成功返回 true，失败返回 false
 //这个参数record_id和book_id是自增的，不需要用户输入，这个借书的时间要用时间函数获取当前时间，deadline是根据借书时间加上一个月得到的，status初始为0表示未归还
-bool Create_Borrow_Book(int account_id, char book_name[MAXSIZE]) {
+bool Create_Borrow_Book(int account_id, int book_id) {
     // 1. 参数校验
-    if (account_id <= 0 || strlen(book_name) == 0) {
+    if (account_id <= 0 ) {
         printf(" 参数错误！\n");
         return false;
     }
@@ -34,15 +34,15 @@ bool Create_Borrow_Book(int account_id, char book_name[MAXSIZE]) {
     }
 
     // 3. 获取图书信息
-    book_t* book = bookMapper.getbyBookName(book_name);
+    book_t* book = bookMapper.getbyId(book_id);
     if (!book) {
-        printf(" 图书《%s》不存在！\n", book_name);
+        printf(" 图书《%d》不存在！\n", book_id);
         return false;
     }
 
     // 4. 检查库存
-    if (book->total <= 0) {
-        printf(" 库存不足！《%s》已无可用书籍。\n", book_name);
+    if ((book->total - book->borrow )<= 0) {
+        printf(" 库存不足！《%d》已无可用书籍。\n", book_id);
         return false;
     }
 
@@ -91,8 +91,8 @@ bool Create_Borrow_Book(int account_id, char book_name[MAXSIZE]) {
 
     if (added && book_updated) {
         printf(" 借书成功！\n");
-        printf("记录ID：%d，书名：《%s》，借阅时间：%s，截止时间：%s\n",
-            new_record_id, book_name, borrow_date, deadline);
+        printf("记录ID：%d，书号：%d，借阅时间：%s，截止时间：%s\n",
+            new_record_id, book_id, borrow_date, deadline);
         delete new_record;  // 如果 addbyOne 复制了数据，可以删；否则不要删
         return true;
     }
@@ -209,6 +209,93 @@ borrowrecord_t* Search_Borrow_Book_One(int account_id, char book_name[MAXSIZE]) 
 
     return result;
 }
+
+//查询单个用户所有的借阅记录，只查返回未归还的借阅记录，返回指向借阅记录数组的指针
+borrowrecord_t* Search_BrrowBookAll(int account_id) {
+    // 获取所有借阅记录
+    borrowrecord_t* all_records = borrowRecordMapper.getbyAll();
+    int count = borrowRecordMapper.get_recordcount();
+
+    if (all_records == nullptr || count == 0) {
+        return nullptr;
+    }
+
+    // 统计符合条件的记录数量（未归还）
+    int valid_count = 0;
+    for (int i = 0; i < count; i++) {
+        if (all_records[i].account_id == account_id &&
+            all_records[i].status == 0) {  // 只查未归还
+            valid_count++;
+        }
+    }
+
+    // 无结果则返回 nullptr
+    if (valid_count == 0) {
+        return nullptr;
+    }
+
+    // 分配新数组存储结果
+    borrowrecord_t* result = new borrowrecord_t[valid_count];
+    int index = 0;
+
+    // 复制符合条件的记录
+    for (int i = 0; i < count; i++) {
+        if (all_records[i].account_id == account_id &&
+            all_records[i].status == 0) {
+            result[index++] = all_records[i];  // 值拷贝
+        }
+    }
+    return result;
+}
+
+
+//归还书籍，成功返回 true，失败返回 false
+bool ReturnBook(int record_id) {
+    // 1. 获取借阅记录
+    borrowrecord_t* record = borrowRecordMapper.getbyBillId(record_id);
+    if (!record) {
+        printf(" 借阅记录 %d 不存在！\n", record_id);
+        return false;
+    }
+
+    // 2. 检查是否已经归还
+    if (record->status == 1) {
+        printf(" 记录 %d 已经归还，无需重复操作。\n", record_id);
+        return false;
+    }
+
+    // 3. 获取对应图书
+    book_t* book = bookMapper.getbyId(record->book_id);
+    if (!book) {
+        printf(" 图书 %d 不存在！\n", record->book_id);
+        return false;
+    }
+
+    // 4. 更新图书信息
+    book->borrow -= 1;  // 借阅数减一
+    book->total += 1;   // 库存加一
+
+    // 5. 更新借阅记录状态
+    record->status = 1;
+
+    // 6. 保存变更
+    bool book_saved = bookMapper.updatebyOne(book);
+    bool record_saved = borrowRecordMapper.updatebyOne(record);
+
+    if (book_saved && record_saved) {
+        printf(" 归还成功！记录ID：%d，书名：《%s》\n",
+            record_id, book->book_name);
+        return true;
+    }
+    else {
+        printf(" 归还失败！请检查文件权限或数据一致性。\n");
+        return false;
+    }
+}
+
+
+
+
 // 查询所有借阅记录，返回指向借阅记录数组的指针
 // 若无记录则返回 nullptr
 borrowrecord_t* Search_Borrow_Book_All() {

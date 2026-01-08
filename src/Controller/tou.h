@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <string.h>
+#include<stdlib.h>
 #define MAXSIZE 50
 
 

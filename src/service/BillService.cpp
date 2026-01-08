@@ -21,9 +21,9 @@ int get_next_bill_id(bill_t* bills) {
 }
 
 //创建账单：成功返回 true，失败返回 false
-bool Create_Bill(int account_id, char book_name[MAXSIZE], int num) {
+bool Create_Bill(int account_id, int book_id, int num) {
     // 1. 校验参数
-    if (account_id <= 0 || strlen(book_name) == 0 || num <= 0) {
+    if (account_id <= 0 || book_id == 0 || num <= 0) {
         printf("参数错误！\n");
         return false;
     }
@@ -36,15 +36,15 @@ bool Create_Bill(int account_id, char book_name[MAXSIZE], int num) {
     }
 
     // 3. 获取图书信息
-    book_t* book = bookMapper.getbyBookName(book_name);
+    book_t* book = bookMapper.getbyId(book_id);
     if (!book) {
-        printf("图书《%s》不存在！\n", book_name);
+        printf("图书《%d》不存在！\n", book_id);
         return false;
     }
 
     // 4. 检查库存是否足够
-    if (book->total < num) {
-        printf("库存不足！《%s》剩余：%d，您要借：%d\n", book_name, book->total, num);
+    if ((book->total-book->borrow) < num) {
+        printf("库存不足！《%d》剩余：%d，您要借：%d\n", book_id, book->total, num);
         return false;
     }
 
@@ -83,8 +83,8 @@ bool Create_Bill(int account_id, char book_name[MAXSIZE], int num) {
 
     if (added && account_saved && book_saved) {
         printf(" 账单创建成功！\n");
-        printf("账单ID：%d，书名：《%s》，数量：%d，总价：%.2f\n",
-            new_bill_id, book_name, num, total_price);
+        printf("账单ID：%d，书编号：《%d》，数量：%d，总价：%.2f\n",
+            new_bill_id, book_id, num, total_price);
         return true;
     }
     else {

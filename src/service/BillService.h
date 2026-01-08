@@ -1,7 +1,7 @@
 #pragma once
 #include "Service.h"
 
-bool Create_Bill(int account_id, char book_name[MAXSIZE], int num);
+bool Create_Bill(int account_id, int book_id, int num);
 bool Delete_Bill(int bill_id);
 bill_t* Search_Bill_One(int account_id);
 bool Revise_Bill( int account_id, char book_name[MAXSIZE]);

@@ -61,10 +61,12 @@ bool AccountRegister() {
     int choice = 1;
     printf("输入0添加用户，输入1添加管理员\n");
 	scanf_s("%d", &choice);
-    if(choice == 0)
-	    Success = Register(account, password, 0.00, phone, 0);  // 默认余额0，手机号占位，0用户||1管理员
-    else
+    if (choice == 0)
+        Success = Register(account, password, 0.00, phone, 0);  // 默认余额0，手机号占位，0用户||1管理员
+    else if (choice == 1)
         Success = Register(account, password, 0.00, phone, 1);  // 默认余额0，手机号占位，0用户||1管理员
+    else
+        printf("请按0或1\n");
 
     return Success;
 }
