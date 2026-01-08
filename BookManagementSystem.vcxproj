@@ -123,6 +123,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Controller\app.cpp" />
+    <ClCompile Include="src\Controller\Manager.cpp" />
+    <ClCompile Include="src\Controller\tou.cpp" />
+    <ClCompile Include="src\Controller\User.cpp" />
     <ClCompile Include="src\FileManager\FileManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mapper\AccountMapper.cpp" />
@@ -135,6 +139,11 @@
     <ClCompile Include="src\service\BorrowRecordService.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Controller\app.h" />
+    <ClInclude Include="src\Controller\Controll.h" />
+    <ClInclude Include="src\Controller\Manager.h" />
+    <ClInclude Include="src\Controller\tou.h" />
+    <ClInclude Include="src\Controller\User.h" />
     <ClInclude Include="src\FileManager\FileManager.h" />
     <ClInclude Include="src\Mapper\AccountMapper.h" />
     <ClInclude Include="src\Mapper\BillMapper.h" />
@@ -145,6 +154,12 @@
     <ClInclude Include="src\service\BookService.h" />
     <ClInclude Include="src\service\BorrowRecordService.h" />
     <ClInclude Include="src\Test.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\Account.dat" />
+    <None Include="data\Bill.dat" />
+    <None Include="data\Book.dat" />
+    <None Include="data\BorrowRecord.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -109,7 +109,7 @@ borrowrecord_t* Search_Borrow_Book_One(int record_id) {
     // 调用 Mapper 获取记录
     borrowrecord_t* record = borrowRecordMapper.getbyBillId(record_id);
 	if (!record) {
-        return false;
+        return nullptr;
 	}
 
     // 如果获取到的 record_id 不等于输入值，说明没找到
@@ -136,7 +136,7 @@ borrowrecord_t* Search_Borrow_Book_All() {
     borrowrecord_t* records = borrowRecordMapper.getbyAll();
 
     if (!records) {
-        return false;
+        return nullptr;
     }
 
     // 如果记录数量为0，返回nullptr

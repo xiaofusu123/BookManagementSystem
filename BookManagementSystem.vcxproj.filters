@@ -45,6 +45,18 @@
     <ClCompile Include="src\Mapper\BillMapper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\Controller\app.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Controller\Manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Controller\tou.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Controller\User.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FileManager\FileManager.h">
@@ -77,5 +89,26 @@
     <ClInclude Include="src\service\BillService.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\Controller\app.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controller\Controll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controller\Manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controller\tou.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controller\User.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\Account.dat" />
+    <None Include="data\Bill.dat" />
+    <None Include="data\Book.dat" />
+    <None Include="data\BorrowRecord.dat" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "FileManager/FileManager.h"
 #include "Mapper/BookMapper.h"
 
+#include "Controller/Controll.h"
 
 void Test()
 {
@@ -30,12 +31,11 @@ void Test()
 	bookMapper.addbyBatch(book, n);
 	bookMapper.deletebyId(0);
 	free(book);
-	book = NULL;
 }
 
 int main()
 {
-	Test();
+	Controller();
 
 	return 0;
 }

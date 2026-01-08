@@ -29,7 +29,7 @@ bool Register(int account_id,char password[MAXSIZE],float balance,char phone[MAX
 
     // 2. 检查账号是否已存在（防止重复注册）
     account_t* existing = accountMapper.getbyId(account_id);
-    if (existing->account_id == account_id) {
+    if (existing) {
         return false;
     }
 
@@ -61,7 +61,7 @@ int Login( int account_id,  char password[MAXSIZE]) {
     account_t* acc = accountMapper.getbyId(account_id);
     if (!acc)
     {
-        return false;
+        return -1;
     }
 
     // 假设 getbyId 在找不到时返回 account_id = -1 或其他无效值
