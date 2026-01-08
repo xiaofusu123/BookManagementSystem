@@ -1,7 +1,11 @@
+#pragma once
+
 #include <iostream>
 #include <chrono>
 
-struct Timer
+void Data();
+
+class Timer
 {
 public:
 	Timer()

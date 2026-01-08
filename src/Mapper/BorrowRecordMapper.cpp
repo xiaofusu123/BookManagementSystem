@@ -81,7 +81,13 @@ bool BorrowRecordMapper::addbyOne(borrowrecord_t* record)
 
 bool BorrowRecordMapper::addbyBatch(borrowrecord_t record[], int n)
 {
-	return false;
+	if (!record || record_count + n > MAXNUMBER)
+		return false;
+
+	for (int i = 0; i < n; i++)
+		records[record_count++] = record[i];
+
+	return true;
 }
 
 bool BorrowRecordMapper::deletebyId(int bill_id)

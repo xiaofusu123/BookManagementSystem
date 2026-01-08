@@ -157,7 +157,6 @@
     <ClInclude Include="src\service\BillService.h" />
     <ClInclude Include="src\service\BookService.h" />
     <ClInclude Include="src\service\BorrowRecordService.h" />
-    <ClInclude Include="src\Test.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Account.dat" />
